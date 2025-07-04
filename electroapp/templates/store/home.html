@@ -1,0 +1,168 @@
+{% extends "store/base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+  .hero-section {
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    color: white;
+    border-radius: 20px;
+    padding: 60px 30px;
+    margin-bottom: 50px;
+  }
+
+  .hero-section h1 span {
+    color: #ffd60a;
+  }
+
+  .why-box {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    background-color: #f8f9fa;
+    border-radius: 16px;
+  }
+
+  .why-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px rgba(0,0,0,0.15);
+  }
+
+  .card-img-top {
+    border-radius: 12px 12px 0 0;
+  }
+
+  .card:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  }
+
+  .section-heading {
+    font-weight: 700;
+    color: #3a0ca3;
+  }
+</style>
+
+<!-- Hero Section -->
+<div class="container hero-section shadow">
+  <div class="row align-items-center">
+    <div class="col-md-6 text-center text-md-start">
+      <h1 class="display-4 fw-bold">
+        Welcome to <span>ElectroZone</span>
+      </h1>
+      <p class="lead mt-3">
+        Explore the latest gadgets and tech accessories. Shop with confidence and get your gear fast.
+      </p>
+      {% if user.is_authenticated %}
+      <a href="{% url 'store:product_list' %}" class="btn btn-warning btn-lg mt-3 shadow">⚡ Shop Now</a>
+      {% else %}
+      <a href="{% url 'store:login' %}" class="btn btn-warning btn-lg mt-3 shadow">⚡ Shop Now</a>
+      {% endif %}
+    </div>
+    <!-- <div class="col-md-6 d-none d-md-block text-center">
+      <img src=""
+           alt="Electronics Banner" class="img-fluid rounded" style="max-height: 350px;">
+    </div> -->
+  </div>
+</div>
+
+<!-- Why Shop With Us -->
+<div class="container my-5 text-center">
+  <h2 class="section-heading mb-4">Why Shop With Us?</h2>
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="p-4 why-box shadow-sm h-100">
+        <i class="bi bi-stars fs-1 text-primary"></i>
+        <h5 class="mt-3">Top Products</h5>
+        <p>We feature only high-rated, popular electronics from trusted brands.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="p-4 why-box shadow-sm h-100">
+        <i class="bi bi-truck fs-1 text-success"></i>
+        <h5 class="mt-3">Fast Shipping</h5>
+        <p>Get your gadgets delivered quickly and reliably across India.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="p-4 why-box shadow-sm h-100">
+        <i class="bi bi-shield-check fs-1 text-info"></i>
+        <h5 class="mt-3">Secure & Trusted</h5>
+        <p>Buy with peace of mind. We offer warranty & full customer support.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Featured Products -->
+<!-- <div class="container my-5">
+  <h2 class="text-center section-heading mb-4">🌟 Featured Products</h2>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for product in featured_products %}
+    <div class="col">
+      <div class="card h-100 shadow-sm border-0">
+        {% if product.image %}
+        <img src="{{ product.image.url }}" class="card-img-top" style="height: 200px; object-fit: cover;" alt="{{ product.name }}">
+        {% else %}
+        <img src="https://via.placeholder.com/300x200?text=No+Image" class="card-img-top" alt="No Image">
+        {% endif %}
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text">{{ product.description|truncatewords:15 }}</p>
+          <a href="{% url 'store:product_detail' product.id %}" class="btn btn-outline-primary mt-auto">View Details</a>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <p class="text-muted text-center">No featured products available right now.</p>
+    {% endfor %}
+  </div>
+</div> -->
+<section class="my-5">
+  <div class="container my-5">
+  <h2 class="text-center section-heading mb-4">🌟 Featured Products</h2>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <img src="data:image/jpeg;base64,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" class="card-img-top" alt="Smartphone">
+        <div class="card-body">
+          <h5 class="card-title">Smartphone Pro X</h5>
+          <p class="card-text">Powerful performance meets modern design in this flagship smartphone.</p>
+          {% if user.is_authenticated %}
+          <a href="{% url 'store:product_list' %}" class="btn btn-outline-primary btn-sm">Shop Now</a>
+          {% else %}
+          <a href="{% url 'store:login' %}" class="btn btn-outline-primary btn-sm">Shop Now</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxvbNLYirOgRmu8erKQjYRlSye4pAHEjYNhQ&s" class="card-img-top" alt="Laptop">
+        <div class="card-body">
+          <h5 class="card-title">UltraBook Z5</h5>
+          <p class="card-text">A sleek, lightweight laptop for work, study, and play.</p>
+          {% if user.is_authenticated %}
+          <a href="{% url 'store:product_list' %}" class="btn btn-outline-primary btn-sm">Shop Now</a>
+          {% else %}
+          <a href="{% url 'store:login' %}" class="btn btn-outline-primary btn-sm">Shop Now</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <img src="https://m.media-amazon.com/images/I/91VE7C0ZnYL.jpg" class="card-img-top" alt="Smartwatch">
+        <div class="card-body">
+          <h5 class="card-title">SmartFit Watch</h5>
+          <p class="card-text">Track your health and stay connected in style.</p>
+          {% if user.is_authenticated %}
+          <a href="{% url 'store:product_list' %}" class="btn btn-outline-primary btn-sm">Shop Now</a>
+          {% else %}
+          <a href="{% url 'store:login' %}" class="btn btn-outline-primary btn-sm">Shop Now</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

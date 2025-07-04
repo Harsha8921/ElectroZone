@@ -1,0 +1,72 @@
+{% extends "store/base.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+  .about-section {
+    background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  .about-icon {
+    font-size: 1.3rem;
+    margin-right: 10px;
+    color: #3a0ca3;
+  }
+
+  .about-btn {
+    background-color: #3a0ca3;
+    border: none;
+    color: white;
+    transition: all 0.3s ease;
+  }
+
+  .about-btn:hover {
+    background-color: #7209b7;
+  }
+
+  .about-heading {
+    font-weight: 700;
+    color: #3a0ca3;
+  }
+
+  .about-section p {
+    color: #333;
+  }
+</style>
+
+<div class="container my-5">
+  <div class="about-section">
+    <h2 class="text-center mb-4 about-heading">About ElectroZone</h2>
+    <div class="row align-items-center">
+      <!-- <div class="col-md-6">
+        <img src="{% static 'images/about-electro.jpg' %}" class="img-fluid rounded-3 shadow" alt="About ElectroZone">
+      </div> -->
+      <div class="col-md-6 mt-4 mt-md-0">
+        <p class="lead">
+          Welcome to <strong>ElectroZone</strong> – your one-stop shop for the latest and greatest in electronic gadgets.
+        </p>
+        <p>
+          From cutting-edge smartphones to powerful laptops and smart wearables, we bring innovation directly to your fingertips.
+        </p>
+        <p>
+          We are passionate about technology and committed to offering top-quality products with unmatched service.
+        </p>
+        <p>
+          <i class="about-icon bi bi-truck"></i>Fast Delivery<br>
+          <i class="about-icon bi bi-credit-card"></i>Secure Payments<br>
+          <i class="about-icon bi bi-headset"></i>24/7 Customer Support
+        </p>
+        {% if user.is_authenticated %}
+        <a href="{% url 'store:product_list' %}" class="btn about-btn mt-3">🚀 Browse Our Products</a>
+        {% else %}
+        <a href="{% url 'store:login' %}" class="btn about-btn mt-3">🚀 Browse Our Products</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

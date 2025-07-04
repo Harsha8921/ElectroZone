@@ -1,0 +1,52 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+<style>
+  .signup-header {
+    background: linear-gradient(to right, #74ebd5, #9face6);
+    padding: 50px 20px;
+    border-radius: 20px;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .signup-card {
+    background: #ffffffdd;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .signup-card input:focus {
+    border-color: #6a11cb;
+    box-shadow: 0 0 5px rgba(106, 17, 203, 0.5);
+  }
+
+  .btn-signup {
+    background-color: #6a11cb;
+    border: none;
+  }
+
+  .btn-signup:hover {
+    background-color: #5a0db0;
+  }
+</style>
+
+<div class="container mt-5">
+  <div class="signup-header">
+    <h2>Create Your Account</h2>
+    <p>Join us today — it's quick and easy!</p>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <form method="post" class="signup-card">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-signup w-100 mt-3 text-white">Sign Up</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

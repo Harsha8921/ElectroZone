@@ -1,0 +1,26 @@
+{% extends "store/base.html" %}
+{% block content %}
+<h2>Thank You for Your Purchase!</h2>
+
+<p>Here is your receipt:</p>
+
+<table>
+    <tr>
+        <th>Product</th>
+        <th>Qty</th>
+        <th>Price</th>
+        <th>Total</th>
+    </tr>
+    {% for item in items %}
+    <tr>
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>₹{{ item.product.price }}</td>
+        <td>₹{{ item.product.price|floatformat:2 }} x {{ item.quantity }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<p><strong>Total Paid: ₹{{ total }}</strong></p>
+<a href="{% url 'home' %}">Back to Home</a>
+{% endblock %}

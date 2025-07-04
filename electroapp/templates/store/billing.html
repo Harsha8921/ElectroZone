@@ -1,0 +1,107 @@
+{% extends "store/base.html" %}
+
+{% block content %}
+<style>
+  .billing-container {
+    max-width: 800px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .billing-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #333;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+
+  th, td {
+    text-align: center;
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  th {
+    background-color: #f2f2f2;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+  }
+
+  td {
+    font-size: 1rem;
+  }
+
+  .grand-total {
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-align: right;
+    margin-top: 20px;
+    color: #007bff;
+  }
+
+  .complete-btn {
+    display: inline-block;
+    background-color: #28a745;
+    color: white;
+    font-weight: 600;
+    padding: 10px 25px;
+    text-decoration: none;
+    border-radius: 30px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+  }
+
+  .complete-btn:hover {
+    background-color: #218838;
+  }
+
+  .empty-cart {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #999;
+  }
+</style>
+
+<div class="billing-container">
+  <h2 class="billing-title">🧾 Billing Summary</h2>
+
+  {% if cart_items %}
+    <table>
+      <tr>
+        <th>Product</th>
+        <th>Qty</th>
+        <th>Price</th>
+        <th>Total</th>
+      </tr>
+      {% for item in cart_items %}
+      <tr>
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>₹{{ item.product.price }}</td>
+        <td>₹{{ item.total }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <p class="grand-total">Grand Total: ₹{{ total }}</p>
+
+    <form method="POST">
+      {% csrf_token %}
+      <a href="{% url 'store:home' %}" class="complete-btn">Complete Purchase</a>
+    </form>
+
+  {% else %}
+    <p class="empty-cart">Your cart is empty 🛒</p>
+  {% endif %}
+</div>
+{% endblock %}

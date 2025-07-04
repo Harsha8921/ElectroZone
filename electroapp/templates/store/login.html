@@ -1,0 +1,56 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+<style>
+  .login-header {
+    background: linear-gradient(to right, #ffecd2, #fcb69f);
+    padding: 50px 20px;
+    border-radius: 20px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .login-card {
+    background: #ffffffee;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .login-card input:focus {
+    border-color: #f27059;
+    box-shadow: 0 0 5px rgba(242, 112, 89, 0.5);
+  }
+
+  .btn-login {
+    background-color: #f27059;
+    border: none;
+  }
+
+  .btn-login:hover {
+    background-color: #d35400;
+  }
+</style>
+
+<div class="container mt-5">
+  <div class="login-header">
+    <h2>Welcome Back</h2>
+    <p>Please log in to continue</p>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <form method="post" class="login-card">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-login w-100 mt-3 text-white">🔐 Log In</button>
+      </form>
+      <p class="text-center mt-3">
+        Don't have an account?
+        <a href="{% url 'store:signup' %}" class="text-decoration-none text-primary fw-bold">Sign up here</a>
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}
